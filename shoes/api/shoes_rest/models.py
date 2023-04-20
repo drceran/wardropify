@@ -5,9 +5,11 @@ from django.db import models
 
 
 class BinVO(models.Model):
-    import_href = models.CharField(unique=True, max_length=200)
-    name = models.CharField(max_length=200)
-
+    closet_name = models.CharField(max_length=100, null=True)
+    bin_number = models.PositiveSmallIntegerField(null=True)
+    bin_size = models.PositiveSmallIntegerField(null=True)
+    import_href = models.URLField(max_length=200, null=True)
+# hidden pk
 
 class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200)
@@ -25,3 +27,7 @@ class Shoe(models.Model):
 
     class Meta:
         ordering = ("model_name",)
+
+# class ShoeLocationEncoder
+
+# class ShoeBinEncoder
