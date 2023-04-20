@@ -1,3 +1,13 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import HatDetails, LocationVO
+
+
+@admin.register(HatDetails)
+class HatDEtailsAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(LocationVO)
+class LocationVOAdmin(admin.ModelAdmin):
+    pass
