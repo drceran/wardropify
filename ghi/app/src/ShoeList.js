@@ -17,13 +17,6 @@ function ShoeList({ shoes }) {
         fetchdata();
     }, []);
 
-
-    // const deleteShoe = async (event, id) => {
-    //     event.preventDefault();
-    //     alert(id)
-
-    // }
-
     const deleteShoe = async (pk) => {
         fetch(`http://localhost:8080/api/shoes/${pk}`, {
             method: 'delete',
@@ -34,10 +27,6 @@ function ShoeList({ shoes }) {
             window.location.reload();
         })
     }
-
-// api cagirirken metod delete
-// cevap geldikten sonra ekranda
-// shoedetails icinde pk si 4 olan item i sil.
 
     return (
         <table className='table'>
@@ -70,3 +59,18 @@ function ShoeList({ shoes }) {
     );
 }
 export default ShoeList;
+
+
+
+
+
+    // const deleteShoe = async (event, id) => {
+    //     event.preventDefault();
+    //     alert(id)
+
+    // }
+
+
+// api cagirirken metod delete
+// cevap geldikten sonra ekranda
+// shoedetails icinde pk si 4 olan item i sil.

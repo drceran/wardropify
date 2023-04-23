@@ -8,9 +8,9 @@ import json
 # Create your views here.
 
 
-class BinVOEncoder(ModelEncoder):
-    model = BinVO
-    properties = ["closet_name", "bin_number", "bin_size"]
+# class BinVOEncoder(ModelEncoder):
+#     model = BinVO
+#     properties = ["closet_name", "bin_number", "bin_size"]
 
 
 class BinVODetailEncoder(ModelEncoder):
@@ -18,10 +18,10 @@ class BinVODetailEncoder(ModelEncoder):
     properties = ["closet_name", "import_href"]
 
 
-class ShoeListEncoder(ModelEncoder):
-    model = Shoe
-    properties = ["manufacturer", "model_name", "bin"]
-    encoders = {"bin": BinVOEncoder()}
+# class ShoeListEncoder(ModelEncoder):
+#     model = Shoe
+#     properties = ["manufacturer", "model_name", "bin"]
+#     encoders = {"bin": BinVOEncoder()}
 
 
 class ShoeDetailEncoder(ModelEncoder):
