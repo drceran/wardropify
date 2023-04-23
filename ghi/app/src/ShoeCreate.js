@@ -44,6 +44,7 @@ function ShoeCreate(props) {
                 bin: '',
                 picture_url: '',
             });
+            event.target.reset();
         }
     }
     const handleFormChange = (e) => {
@@ -53,7 +54,6 @@ function ShoeCreate(props) {
         setFormData({
             ...formData,
             [inputName]: value
-
         });
     }
     return (
