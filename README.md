@@ -17,5 +17,4 @@ In this project, shoes microservice manages shoes and shoe bins. In shoes contex
 
 ## Hats microservice
 
-Explain your models and integration with the wardrobe
-microservice, here.
+I made a hats microservice that takes hats and hat location models to store and create hat information. I integrated this with the wardrobe microservice by pulling it using a locationVO model. all of the models have encoders. These microservices work together to create, delete and display hat information for the user.
