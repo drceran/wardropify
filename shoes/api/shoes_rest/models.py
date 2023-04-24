@@ -11,6 +11,7 @@ class BinVO(models.Model):
     import_href = models.URLField(max_length=200, null=True)
 # hidden pk
 
+
 class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200)
     model_name = models.CharField(max_length=200)

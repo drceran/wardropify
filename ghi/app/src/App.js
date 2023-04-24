@@ -7,13 +7,18 @@ import ShoeList from './ShoeList';
 import ShoeCreate from './ShoeCreate';
 
 
-function App() {
+function App(props) {
+
   return (
     <BrowserRouter>
       <Nav />
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="shoes">
+            <Route index element={<ShoeList shoes={props.shoes} />} />
+          </Route>
+          <Route path="/shoes/new" element={<ShoeCreate />} />
         </Routes>
         <Routes>
           <Route path="shoes">

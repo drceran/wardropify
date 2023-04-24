@@ -7,19 +7,21 @@ import json
 
 # Create your views here.
 
-class BinVOEncoder(ModelEncoder):
-    model = BinVO
-    properties = ["closet_name", "bin_number", "bin_size"]
+
+# class BinVOEncoder(ModelEncoder):
+#     model = BinVO
+#     properties = ["closet_name", "bin_number", "bin_size"]
+
 
 class BinVODetailEncoder(ModelEncoder):
-    model=BinVO
-    properties=["closet_name", "import_href"]
+    model = BinVO
+    properties = ["closet_name", "import_href"]
 
 
-class ShoeListEncoder(ModelEncoder):
-    model = Shoe
-    properties = ["manufacturer", "model_name", "bin"]
-    encoders = {"bin": BinVOEncoder()}
+# class ShoeListEncoder(ModelEncoder):
+#     model = Shoe
+#     properties = ["manufacturer", "model_name", "bin"]
+#     encoders = {"bin": BinVOEncoder()}
 
 
 class ShoeDetailEncoder(ModelEncoder):
@@ -28,7 +30,9 @@ class ShoeDetailEncoder(ModelEncoder):
         "manufacturer",
         "model_name",
         "bin",
-        "picture_url", "color",
+        "picture_url",
+        "color",
+        "pk"
     ]
     encoders = {
         "bin": BinVODetailEncoder(),
@@ -42,7 +46,7 @@ def api_list_shoes(request):
         shoes = Shoe.objects.all()
         return JsonResponse(
             {"shoes": shoes},
-            encoder=ShoeListEncoder,
+            encoder=ShoeDetailEncoder,
             safe=False,
         )
     else:
@@ -56,7 +60,6 @@ def api_list_shoes(request):
                 {"message": "Invalid bin id"},
                 status=400,
             )
-
         shoe = Shoe.objects.create(**content)
         return JsonResponse(
             shoe,
@@ -67,21 +70,15 @@ def api_list_shoes(request):
 
 @require_http_methods(["DELETE"])
 def api_shoe_detail(request, id):
-    # shoe = Shoe.objects.get(id=id)
-    # if request.method == "GET":
-    #     return JsonResponse(
-    #         shoe,
-    #         encoder=ShoeDetailEncoder,
-    #         safe=False,
-    #     )
-    # elif request.method == "PUT":
-    #     content = json.loads(request.body)
-    #     Shoe.objects.filter(id=id).update(**content)
-    #     return JsonResponse(
-    #         shoe,
-    #         encoder=ShoeDetailEncoder,
-    #         safe=False,
-    #     )
-    # else:
     count, _ = Shoe.objects.filter(id=id).delete()
     return JsonResponse({"deleted": count > 0})
+
+
+@require_http_methods(["GET"])
+def api_list_bins(request):
+    bins = BinVO.objects.all()
+    return JsonResponse(
+        {"bins": bins},
+        encoder=BinVODetailEncoder,
+        safe=False,
+    )

@@ -59,3 +59,18 @@ function ShoeList({ shoes }) {
     );
 }
 export default ShoeList;
+
+
+
+
+
+    // const deleteShoe = async (event, id) => {
+    //     event.preventDefault();
+    //     alert(id)
+
+    // }
+
+
+// api cagirirken metod delete
+// cevap geldikten sonra ekranda
+// shoedetails icinde pk si 4 olan item i sil.

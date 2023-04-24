@@ -101,3 +101,5 @@ function ShoeCreate(props) {
 }
 
 export default ShoeCreate;
+
+{/* <Link to='shoes/new'> Create a new shoe</Link> */ }
