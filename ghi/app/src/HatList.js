@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 function HatList() {
 
@@ -16,7 +17,24 @@ function HatList() {
         fetchdata();
 }, []);
 
+const handleDeleteHat = async (id) => {
+    const hatURL = `http://localhost:8090/api/hatdetails/${id}`;
+    const fetchConfig = {
+        method: 'delete',
+    }
+    const response = await fetch(hatURL, fetchConfig);
+    if (response.ok) {
+        setHats(hatdetails.filter((hat) => hat.id));
+
+    }
+    document.location.reload();
+};
+
     return (
+    <>
+    <Link to="/hats/new">
+            <button type="button" className="btn btn-outline-primary">Add a new hat</button>
+        </Link>
         <table className="table table-striped">
             <thead>
             <tr>
@@ -38,11 +56,15 @@ function HatList() {
                     <img src={hatdetail.picture}/>
                     </td>
                     <td>{ hatdetail.location.closet_name }</td>
+                    <td>
+                        <button onClick={() => handleDeleteHat(hatdetail.id)} className="btn btn-lg btn-primary" >Delete Hat </button>
+                    </td>
                 </tr>
                 );
             })}
             </tbody>
         </table>
+    </>
     );
 }
 

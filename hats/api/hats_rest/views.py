@@ -30,6 +30,8 @@ class HatDetailsEncoder(ModelEncoder):
         "color",
         "picture",
         "location",
+        "id"
+
     ]
     encoders = {
         "location": LocationVOEncoder(),
@@ -62,8 +64,37 @@ def api_show_hats(request):
             safe=False,
         )
 
+
+@require_http_methods({"GET", "POST"})
+def api_hat_details(request, id):
+    if request.method == "GET":
+        hatsdetail = HatDetails.objects.all()
+        return JsonResponse(
+            {"hatsdetail": hatsdetail},
+            encoder=HatDetailsEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+
+        try:
+            location = LocationVO.objects.get(id=id)
+            content["location"] = location
+        except LocationVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid location hat details id"},
+                status=400,
+            )
+
+        hatdetail = HatDetails.objects.create(**content)
+        return JsonResponse(
+            hatdetail,
+            encoder=HatDetailsEncoder,
+            safe=False,
+        )
+
+
 @require_http_methods(["DELETE"])
-def api_hat_detail(request, id):
+def api_hat_delete(request, id):
     count, _ = HatDetails.objects.get(id=id).delete()
     return JsonResponse({"deleted": count > 0})
 
@@ -94,3 +125,9 @@ def api_show_locations(request):
             encoder=LocationVOEncoder,
             safe=False
         )
+
+
+@require_http_methods(["DELETE"])
+def api_delete_location(request, id):
+    count, _ = HatDetails.objects.get(id=id).delete()
+    return JsonResponse({"deleted": count > 0})

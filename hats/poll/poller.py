@@ -5,6 +5,7 @@ import time
 import json
 import requests
 
+
 sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hats_project.settings")
 django.setup()
@@ -21,7 +22,6 @@ def get_location():
         LocationVO.objects.update_or_create(
             import_href=location["href"],
             defaults={
-                "import_href": location["href"],
                 "closet_name": location["closet_name"],
                 "section_number": location["section_number"],
                 "shelf_number": location["shelf_number"],
