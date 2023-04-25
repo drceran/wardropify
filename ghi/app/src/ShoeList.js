@@ -27,7 +27,7 @@ function ShoeList({ shoes }) {
             window.location.reload();
         })
     }
-
+// intead just update the state - automatically render- update the state
     return (
         <table className='table'>
             <thead>
